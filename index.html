@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+        <script src="index.js"></script>
+    </head>
+    <body>
+        <div class="titlebar">
+            <div class="window-title" style="position: absolute; left: 50%; transform: translate(-50%, -5px);">
+                DiscordBotViewer
+            </div>
+            <div class="winbutton closebutton" aria-label="Close" role="button" onclick="quitApp()">
+                <svg aria-hidden="false" width="12" height="12" viewBox="0 0 12 12">
+                    <polygon fill="currentColor" fill-rule="evenodd" points="11 1.576 6.583 6 11 10.424 10.424 11 6 6.583 1.576 11 1 10.424 5.417 6 1 1.576 1.576 1 6 5.417 10.424 1" />
+                </svg>
+            </div>
+        </div>
+        <div class="mainpanel" style="display: flex; flex-direction: row;">
+            <div class="guildmenu" id="guilds-container" style="flex: 0 0 66px; display: flex; flex-flow: column; height: 100%; background-color: #222; overflow: hidden scroll;"></div>
+            <div class="contentpanel" style="align-content: center; display: flex; flex-direction: row; flex-grow: 1">
+                <div class="channelmenu" id="channels-container" style="flex: 0 0 230px; display: flex; flex-flow: column; height: 100%; background-color: #303030; overflow: hidden scroll;"></div>
+                <div class="chatpanel" style="display: flex; flex-direction: column-reverse; flex-grow: 1;">
+                    <div class="userinput" style="width: 100%; background-color: #222;">
+                        <input id="usertextinput" type="text" style="width: 80%" />
+                    </div>
+                    <div class="chat-box" id="chatbox" style="display: flex; flex-direction: column-reverse; width: 100%">
+                        No message here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script>
+        startApp();
+    </script>
+</html>

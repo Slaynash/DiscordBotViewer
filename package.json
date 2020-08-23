@@ -1,0 +1,14 @@
+{
+  "name": "discordbotviewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Slaynash",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
