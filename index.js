@@ -173,12 +173,35 @@ function displayChat(guildid, channelid) {
     })
     .then(messages => {
         messages.forEach(message => {
-            chatbox.innerHTML += `<div>${message.author.username}: ${message.content}</div>`
+            addMessage(message);
         })
     })
 }
 
 function addMessage(message) {
     let chatbox = document.getElementById("chatbox");
-    chatbox.innerHTML = `<div>${message.author.username}: ${message.content}</div>` + chatbox.innerHTML;
+
+    let messageContent = message.content;
+
+    messageContent = messageContent.replace(/(?<!\\)<:([a-zA-Z0-9]+?(?=:)):([0-9]+?(?=>))>/g, (match, captureName, captureId) => { // <:name:code:>
+        return `<img src="https://cdn.discordapp.com/emojis/${captureId}.png?v=1" style="width: 32px;"/>`;
+    })
+
+    messageContent = messageContent.replace(/(?<!\\)<@!([0-9]+?(?=>))>/g, (match, captureId) => { // <:name:code:>
+        let username = discordClient.users.cache.get(captureId)?.username;
+        if (username == undefined)
+            username = `<@!${captureId}>`;
+        else
+            username = `@${username}`;
+
+        return `<span class="mention" style="color: cyan; text-decoration: underline;">${username}</span>`;
+    })
+
+    message.attachments.forEach(att => {
+        if (att.name.endsWith(".png") | att.name.endsWith(".jpg"))
+            messageContent += `<br /><img src="${att.proxyURL}" style="max-width: 80%; max-height: 300px;" />`
+        // TODO else
+    })
+
+    chatbox.innerHTML = `<div>${message.author.username}: ${messageContent}</div>` + chatbox.innerHTML;
 }
