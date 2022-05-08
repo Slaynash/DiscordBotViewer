@@ -110,13 +110,21 @@ function showGuild(guildId) {
         let orderedChannels = new Map();
 
         guild.channels.cache.forEach(channel => {
-            if (channel.parent == undefined)
+            if (channel.parent == undefined && channel.type != "category") {
                 orderedChannels.set(channel.position, channel);
-            else
-                console.log("channel.parent of " + channel.name + " is not undefined")
+            }
         });
-
         orderedChannels = new Map([...orderedChannels.entries()].sort());
+
+        let orderedCategories = new Map();
+        guild.channels.cache.forEach(channel => {
+            if (channel.type == "category")
+                orderedCategories.set(channel.position, channel);
+        });
+        orderedCategories = new Map([...orderedCategories.entries()].sort());
+        orderedCategories.forEach(category => {
+            orderedChannels.set(category.position + orderedChannels.size, category);
+        });
 
         orderedChannels.forEach(channel => {
             addChannelToElement(channel, channelsContainer);
