@@ -50,7 +50,7 @@ function setupGuildList() {
 
     console.log(discordClient.guilds.cache)
 
-    discordClient.guilds.cache.sort((a, b) => a.id - b.id).forEach(guild => {
+    discordClient.guilds.cache.sort((a, b) => a.name.localeCompare(b.name)).forEach(guild => {
         console.log(`[${guild.id}] ${guild.name} (icon: ${guild.icon})`);
 
         let guildButton = document.createElement("div");
