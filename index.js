@@ -122,12 +122,14 @@ function showGuild(guildId) {
             addChannelToElement(channel, channelsContainer);
         });
 
-        guild.fetchInvites()
-            .then(invites => {
-                console.log(`Fetched ${invites.size} invites`)
-                invites.forEach(invite => console.log(` - ${invite.url} to #${invite.channel.id}`))
-            })
-            .catch(console.error);
+        if (guild.me.hasPermission("MANAGE_GUILD")) {
+            guild.fetchInvites()
+                .then(invites => {
+                    console.log(`Fetched ${invites.size} invites`)
+                    invites.forEach(invite => console.log(` - ${invite.url} to #${invite.channel.id}`))
+                })
+                .catch(console.log("Failed to fetch invites"));
+        }
     })
 }
 
