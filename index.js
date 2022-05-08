@@ -140,9 +140,15 @@ function addChannelToElement(channel, channelsContainer) {
             channelElement.innerText = `# ${channel.name}`;
             channelsContainer.append(channelElement);
 
-            channelElement.addEventListener("click", () => {
-                displayChat(channel.guild.id, channel.id)
-            });
+            if (channel.viewable) {
+                channelElement.addEventListener("click", () => {
+                    displayChat(channel.guild.id, channel.id)
+                });
+            }
+            else {
+                //grey out the channel
+                channelElement.style.color = "grey";
+            }
 
             break;
         }
