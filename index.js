@@ -196,13 +196,16 @@ function addChannelToElement(channel, channelsContainer) {
             let orderedChannelsD1 = new Map();
 
             channel.children.forEach(channel => {
-                orderedChannelsD1.set(channel.position, channel);
+                if (channel.type == "text")
+                    orderedChannelsD1.set(channel.position, channel);
+                else
+                    orderedChannelsD1.set(channel.position + 69, channel);
             })
 
             orderedChannelsD1 = new Map([...orderedChannelsD1.entries()].sort());
 
             orderedChannelsD1.forEach(channelInner => {
-                console.log(`${channelInner.name} > ${channelInner.name}`)
+                console.log(`${channel.name} > ${channelInner.name}`)
                 addChannelToElement(channelInner, channelElement);
             });
 
